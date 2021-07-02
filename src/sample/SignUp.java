@@ -4,7 +4,6 @@
 
 package sample;
 
-import java.util.ArrayList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -79,42 +78,63 @@ public class SignUp {
 
     }
 
+
     @FXML
     void pressNext(ActionEvent event) {
 
-        ArrayList<User> users = new ArrayList<>();
 
-        //check that the passwords are the same or not
-        boolean isThePasswordsTheSame = txtPassword1.getText().equals(txtPassword2);
-        if(!isThePasswordsTheSame)
-           /* Classname error .setErorr("the password aren't the same") */ ;
+        if (!signUpIsCorrect())
+            return;
 
-           //check that the gmail is correct or not
-            isEmailCorrect(txtEmail.getText());
-
-            //creating a user account
-        users.add(new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
+        //creating a user account
+        dataBase.users.add(new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
                 ,txtNationalCode.getText(),txtEmail.getText(),txtPhone.getText()));
 
-
-
+        // go to next page
     }
 
-    void isEmailCorrect (String Email){
+    boolean signUpIsCorrect(){
 
-        boolean isTheEndOfEmailCorrect = Email.substring(Email.lastIndexOf("@")).equals("@gmail.com");
-        if (!isTheEndOfEmailCorrect)
-            // erorr calssname .setErorr (" you havn't write the \'@gmail.com\' correct ");
+        //check that the passwords are the same or not
+        boolean isThePasswordsTheSame = txtPassword1.getText().equals(txtPassword2.getText());
+        if(!isThePasswordsTheSame) {
+            /* Classname error .setErorr("the password aren't the same"); */
+            return false;
+        }
+
+        //check that the gmail is correct or not
+        if (!isEmailCorrect(txtEmail.getText()))
+            return false;
+
+        /**
+         * check if the national number and phone number are only numbers
+         * check if the first & last name are only characters
+         * check that national number have only 10 index
+         */
+
+        return true;
+    }
+
+    boolean isEmailCorrect (String Email){
+
+        // at the end of the
+        boolean isTheEndOfEmailCorrect = Email.substring(Email.lastIndexOf(".")).equals(".com") &&
+                Email.contains("@");
+        if (!isTheEndOfEmailCorrect) {
+            // erorr calssname .setErorr (" you havn't write \'@\' or the \'.com\' ");
+            return false;
+        }
 
             Email = "https://WWW." + Email;
         try {
             java.net.URL url = new java.net.URL(Email);
             Scanner input = new Scanner(url.openStream());
-            System.out.println("google");
         } catch (Exception e) {
             // erorr calssname .setErorr (" the gmail isn't correct");
+            return false;
         }
 
+        return true;
     }
 
 }
