@@ -1,9 +1,12 @@
 package sample;
 
-public class User {
+import java.io.*;
+import java.util.Scanner;
 
-    private int numberOfAPersonAccount = 0;
-    private int userNumber;
+public class User implements Serializable {
+
+    private int numberOfAPersonAccount;
+    private static int userNumber;
     private String FirstName;
     private String LastName;
     private String Password;
@@ -20,19 +23,22 @@ public class User {
         NationalCode = nationalCode;
         Email = email;
         Phone = phone;
-        userNumber = dataBase.users.size() -1 ;
+        userNumber = dataBase.userNumber();
+        makeThisUserDir(String.valueOf(userNumber));
     }
 
 
-    @Override
-    public String toString() {
-        return
-                 userNumber + " " +
-                 FirstName + " " +
-                 LastName + " " +
-                 Password + " " +
-                 NationalCode + " " +
-                 Email + " " +
-                 Phone    ;
+
+    void makeThisUserDir(String username) {
+
+        //make sure that Users directoru exists
+        File UserDir = new File("Users");
+        if (!UserDir.exists())
+            UserDir.mkdir();
+
+        //make "username" directory in Users Direcrory
+        File usernamefile = new File("Users", username);
+        usernamefile.mkdir();
+
     }
 }

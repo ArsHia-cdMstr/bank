@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -33,8 +34,9 @@ public class FirstPage {
     private Button btnCreateAccount; // Value injected by FXMLLoader
 
     @FXML
-    void pressAdminPortal(ActionEvent event) {
+    void pressAdminPortal(ActionEvent event) throws IOException {
 
+       error.setError("under construction");
     }
 
     @FXML

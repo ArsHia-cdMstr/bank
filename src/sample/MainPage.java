@@ -1,10 +1,15 @@
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class MainPage {
 
@@ -39,8 +44,15 @@ public class MainPage {
     private Button btnCloseAnAccount; // Value injected by FXMLLoader
 
     @FXML
-    void pressAccountInformation(ActionEvent event) {
-
+    void pressAccountInformation(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnAccountInformation.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Accountinfo.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        error.setWarning("please choose an Account");
     }
 
     @FXML
