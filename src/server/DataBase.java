@@ -1,4 +1,6 @@
-package sample;
+package server;
+
+import sample.error;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,20 +33,21 @@ public class DataBase {
 
             return(User) input.readObject();
         } catch (Exception e) {
+            error.setError("username invalid!");
             e.printStackTrace();
         }
 
         return null;
     }
-    public static Account readAlias(String nationalCode, String alias)  {
+    public static ArrayList<String> readAlias(String nationalCode)  {
         try ( // Create an input stream for file object.dat
               ObjectInputStream input =
-                      new ObjectInputStream(new FileInputStream("Users/" + nationalCode + "/" +alias+ ".dat"));
+                      new ObjectInputStream(new FileInputStream("Users/" + nationalCode +"/AliasNames.dat"));
         ) {
 
-            return(Account) input.readObject();
+            return(ArrayList<String>) input.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
+            error.setError("the userName is invalid!");
         }
 
         return null;
@@ -103,6 +106,12 @@ public class DataBase {
     }
 
 
+
+
+//    public static Integer userNumber (){return givefileNumber(1,"UserNumber"); };
+    public static Integer accountNumber (){return givefileNumber(1000,"AccountNumber"); }
+    public static Integer transfeNumber (){return givefileNumber(1000,"TransferNumber"); }
+
     // the number that we start from :int number
     //the file which we save the file in: String numberType
     static int givefileNumber (int number ,String numberType){
@@ -125,11 +134,5 @@ public class DataBase {
 
         return Number;
     }
-
-   public static ArrayList<User> users = new ArrayList<>();
-
-//    public static Integer userNumber (){return givefileNumber(1,"UserNumber"); };
-    public static Integer accountNumber (){return givefileNumber(1000,"AccountNumber"); }
-    public static Integer transfeNumber (){return givefileNumber(1000,"TransferNumber"); }
 
 }

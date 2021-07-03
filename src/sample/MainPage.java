@@ -1,11 +1,11 @@
 package sample;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -13,51 +13,43 @@ import javafx.stage.Stage;
 
 public class MainPage {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    @FXML private Button btnExit;
 
-    @FXML // fx:id="btnExit"
-    private Button btnExit; // Value injected by FXMLLoader
+    @FXML private Button btnAccountManagement;
 
-    @FXML // fx:id="btnAccountManagement"
-    private Button btnAccountManagement; // Value injected by FXMLLoader
+    @FXML private Button btnLoanRequest;
 
-    @FXML // fx:id="btnLoanRequest"
-    private Button btnLoanRequest; // Value injected by FXMLLoader
+    @FXML private Button btnPayingBorrow;
 
-    @FXML // fx:id="btnPayingBorrow"
-    private Button btnPayingBorrow; // Value injected by FXMLLoader
+    @FXML private Button btnFundTransfers;
 
-    @FXML // fx:id="btnFundTransfers"
-    private Button btnFundTransfers; // Value injected by FXMLLoader
+    @FXML private Button btnFrequentlyUsedAccounts;
 
-    @FXML // fx:id="btnFrequentlyUsedAccounts"
-    private Button btnFrequentlyUsedAccounts; // Value injected by FXMLLoader
+    @FXML private Button btnAccountInformation;
 
-    @FXML // fx:id="btnAccountInformation"
-    private Button btnAccountInformation; // Value injected by FXMLLoader
+    @FXML private Button btnCloseAnAccount;
 
-    @FXML // fx:id="btnCloseAnAccount"
-    private Button btnCloseAnAccount; // Value injected by FXMLLoader
 
     @FXML
     void pressAccountInformation(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnAccountInformation.getScene().getWindow();
         stage.close();
         Stage primaryStage = new Stage();
-        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Accountinfo.fxml"));
+        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Accountinfo3.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-        error.setWarning("please choose an Account");
     }
 
     @FXML
-    void pressAccountManagement(ActionEvent event) {
-
+    void pressAccountManagement(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnAccountManagement.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AccountManagement.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML
@@ -89,4 +81,6 @@ public class MainPage {
     void pressPayingBorrow(ActionEvent event) {
 
     }
+
+
 }

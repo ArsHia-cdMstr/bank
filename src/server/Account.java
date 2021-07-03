@@ -1,4 +1,6 @@
-package sample;
+package server;
+
+import sample.error;
 
 import java.io.Serializable;
 import java.util.ArrayList;

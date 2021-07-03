@@ -1,4 +1,4 @@
-package sample;
+package server;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ public class User implements Serializable {
 //    private static int userNumber;
     private String FirstName;
     private String LastName;
-    private String Password;
-    protected String NationalCode;
+    public String Password;
+    public String NationalCode;
     private String Email;
     private String Phone;
     public int NumberOfUserAccount = 0;

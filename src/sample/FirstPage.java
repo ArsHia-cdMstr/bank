@@ -15,23 +15,13 @@ import javafx.stage.Stage;
 
 public class FirstPage {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+    @FXML private Button btnSignin;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    @FXML private Button btnExit;
 
-    @FXML // fx:id="btnSignin"
-    private Button btnSignin; // Value injected by FXMLLoader
+    @FXML private Button btnAdminPortal;
 
-    @FXML // fx:id="btnExit"
-    private Button btnExit; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnAdminPortal"
-    private Button btnAdminPortal; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnCreateAccount"
-    private Button btnCreateAccount; // Value injected by FXMLLoader
+    @FXML private Button btnCreateAccount;
 
     @FXML
     void pressAdminPortal(ActionEvent event) throws IOException {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="514.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Accountinfo2">
+   <children>
+      <Label alignment="CENTER" layoutX="119.0" layoutY="96.0" prefHeight="123.0" prefWidth="181.0" text="account number :" textFill="#ff00006e">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnEnter" layoutX="161.0" layoutY="444.0" mnemonicParsing="false" onAction="#pressEnter" prefHeight="44.0" prefWidth="91.0" text="Enter">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="txtPassword" layoutX="108.0" layoutY="353.0" prefHeight="43.0" prefWidth="198.0" promptText="Password">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </PasswordField>
+      <Label fx:id="lblAlias" alignment="CENTER" layoutX="102.0" layoutY="1.0" prefHeight="123.0" prefWidth="209.0" text="alias">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="1.0" prefHeight="123.0" prefWidth="158.0" text="alias :" textFill="#ff00006e">
+         <font>
+            <Font size="26.0" />
+         </font>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </Label>
+      <Label fx:id="lblAccNumber" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="141.0" prefHeight="185.0" prefWidth="401.0" text="acc nomber" textAlignment="CENTER">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

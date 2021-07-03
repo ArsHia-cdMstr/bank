@@ -2,27 +2,58 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class AccountInfo {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    @FXML // fx:id="btnExit"
-    private Button btnExit; // Value injected by FXMLLoader
+public class Accountinfo implements Initializable {
 
-    @FXML // fx:id="btnacc1"
-    private Button btnacc1; // Value injected by FXMLLoader
+    @FXML public AnchorPane pene1 = new AnchorPane();
 
-    @FXML // fx:id="btnacc3"
-    private Button btnacc3; // Value injected by FXMLLoader
+    @FXML private Button btnExit;
 
-    @FXML // fx:id="btnacc2"
-    private Button btnacc2; // Value injected by FXMLLoader
+    @FXML private Button btnacc1;
 
-    @FXML // fx:id="btnacc5"
-    private Button btnacc5; // Value injected by FXMLLoader
+    @FXML private Button btnacc2;
 
-    @FXML // fx:id="btnacc4"
-    private Button btnacc4; // Value injected by FXMLLoader
+    @FXML private Button btnacc3;
+
+    @FXML private Button btnacc4;
+
+    @FXML public Button btnacc5 = new Button();
+
+    int count = 2;
+
+    public Accountinfo() {
+        pene1.getChildren().remove(btnacc5);
+
+    }
+
+    public void deleting() {
+        if (count == 4) {
+            pene1.getChildren().remove(btnacc5);
+        } else if (count == 3) {
+            pene1.getChildren().remove(btnacc5);
+            pene1.getChildren().remove(btnacc4);
+        } else if (count == 2) {
+            pene1.getChildren().remove(btnacc5);
+            pene1.getChildren().remove(btnacc4);
+            pene1.getChildren().remove(btnacc3);
+        } else if (count == 1) {
+            pene1.getChildren().remove(btnacc5);
+            pene1.getChildren().remove(btnacc4);
+            pene1.getChildren().remove(btnacc3);
+            pene1.getChildren().remove(btnacc2);
+        }
+    }
+
 
     @FXML
     void pressExit(ActionEvent event) {
@@ -30,12 +61,16 @@ public class AccountInfo {
     }
 
     @FXML
-    void pressacc1(ActionEvent event) {
-
+    void pressacc1(ActionEvent event) throws IOException {
+        Stage primaryStage = new Stage();
+        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Accountinfo2.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     @FXML
-    void pressacc2(ActionEvent event) {
+    void pressacc2(ActionEvent event) throws IOException {
 
     }
 
@@ -52,6 +87,11 @@ public class AccountInfo {
     @FXML
     void pressacc5(ActionEvent event) {
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        deleting();
     }
 
 }

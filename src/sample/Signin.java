@@ -9,63 +9,55 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.util.ArrayList;
+
+import server.*;
 
 public class Signin {
 
-    @FXML
-    private Label lblUsername;
+    @FXML private Label lblUsername;
 
-    @FXML
-    private Label lblPassword;
+    @FXML private Label lblPassword;
 
-    @FXML
-    private Button btnEnter;
+    @FXML private Button btnEnter;
 
-    @FXML
-    private TextField txtUsername;
+    @FXML private TextField txtUsername;
 
-    @FXML
-    private TextField txtPassword;
+    @FXML private TextField txtPassword;
 
-    @FXML
-    private Label lblshow;
+    @FXML private Label lblshow;
 
     @FXML
     void pressEnter(ActionEvent event) throws IOException {
-        String userName[] = {"reza" , "ai"};
-        String passWord[] = {"123" , "32l1"};
+
+        // check that username is right and
+        //give the users info
+        User user = DataBase.readUser(txtUsername.getText());
+        if ( user == null )
+            return;
+
+        String userName = user.NationalCode;
+        String passWord = user.Password;
         String userInput = txtUsername.getText();
         String passInput = txtPassword.getText();
-        boolean checkUsername = false;
-        boolean checkPassword = false;
 
-        for (int i = 0; i<userName.length; i++){
-            if (userInput.equals(userName[i])){
-                checkUsername = true;
-                if (passInput.equals(passWord[i])){
-                    checkPassword = true;
-                    lblshow.setText("Access Granted");
-                    Stage stage =(Stage) btnEnter.getScene().getWindow();
-                    stage.close();
-                    Stage primaryStage=new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-                    primaryStage.setScene(new Scene(root));
-                    primaryStage.show();
-                    break;
-                }
-                if (checkUsername == true && checkPassword == false){
-                    lblshow.setText("Password is wrong!");
-                    break;
-                }
-            }
-            if (i == userName.length-1){
-                lblshow.setText("Username is wrong!");
-                break;
-            }
+        if (passInput.equals(passWord)) {
+            error.setInfo("Access Granted" + "\n" + "please select an account");
+
+            //go to account management page
+            Stage stage = (Stage) btnEnter.getScene().getWindow();
+            stage.close();
+            Stage primaryStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AccountManagement.fxml"));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+            return;
+        } else{
+            error.setError("Password is wrong!");
+            return;
         }
-
     }
-
 }
+
+
