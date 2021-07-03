@@ -1,20 +1,25 @@
 package sample;
 
-public class LongTermAccount extends Account{
+import java.io.Serializable;
+
+public class LongTermAccount extends Account implements Serializable {
 
     //interest rate for each 3 min
     final double interestRate = 1.5;
 
     public LongTermAccount(int balance, String AccountPassword) {
         super(balance, AccountPassword);
+        DataBase.printAccount(this);
     }
 
     public LongTermAccount(String AccountPassword) {
-        super(AccountPassword);
+        this(0,AccountPassword);
     }
 
     // call it when you wanna show the balance
-    public void IncreasProfitToBalance(long TimeDiffrence ){
+    public void IncreasProfitToBalance(){
+
+        long TimeDiffrence = System.currentTimeMillis() - AccountDateCreated;
 
         //the times that we should clculate balance
         int calculateTimes = (int) (TimeDiffrence % ( 3 * 60 * 1000 ));
@@ -23,4 +28,21 @@ public class LongTermAccount extends Account{
 
     }
 
+    public int getBalance(){
+        IncreasProfitToBalance();
+        return balance;
+    }
+
+
+    @Override
+    public String toString() {
+        return "LongTermAccount{" +
+                "alias='" + alias + '\'' +
+                ", balance=" + balance +
+                ", AccountDateCreated=" + AccountDateCreated +
+                ", AccountPassword='" + AccountPassword + '\'' +
+                ", moneyTransfersList=" + moneyTransfersList +
+                ", AccountNum=" + AccountNum +
+                '}';
+    }
 }

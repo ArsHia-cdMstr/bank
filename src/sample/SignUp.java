@@ -80,17 +80,24 @@ public class SignUp {
 
 
     @FXML
-    void pressNext(ActionEvent event) {
+    void pressNext(ActionEvent event) throws IOException {
 
 
         if (!signUpIsCorrect())
             return;
 
         //creating a user account
-        dataBase.users.add(new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
+        DataBase.users.add(new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
                 ,txtNationalCode.getText(),txtEmail.getText(),txtPhone.getText()));
 
         // go to next page
+        Stage stage =(Stage) btnNext.getScene().getWindow();
+        stage.close();
+        Stage primaryStage=new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("OpeningAccount.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+
     }
 
     boolean signUpIsCorrect(){
@@ -98,7 +105,7 @@ public class SignUp {
         //check that the passwords are the same or not
         boolean isThePasswordsTheSame = txtPassword1.getText().equals(txtPassword2.getText());
         if(!isThePasswordsTheSame) {
-            /* Classname error .setErorr("the password aren't the same"); */
+             error.setError("the password aren't the same");
             return false;
         }
 
@@ -112,16 +119,30 @@ public class SignUp {
          * check that national number have only 10 index
          */
 
+        if ( !DataBase.isNationalCodeExist(txtNationalCode.getText()) )
+            return false;
+
+        if (!nationalNumHas10Index(txtNationalCode.getText()))
+            return false;
+
         return true;
     }
 
+    boolean nationalNumHas10Index (String nationalNum){
+              if (nationalNum.length() == 10)
+                  return  true;
+              else {
+                  error.setError("natioanl number haven't 10 index");
+                    return false;
+              }
+    }
     boolean isEmailCorrect (String Email){
 
         // at the end of the
         boolean isTheEndOfEmailCorrect = Email.substring(Email.lastIndexOf(".")).equals(".com") &&
                 Email.contains("@");
         if (!isTheEndOfEmailCorrect) {
-            // erorr calssname .setErorr (" you havn't write \'@\' or the \'.com\' ");
+             error.setError(" you havn't write '@' or the '.com' ");
             return false;
         }
 
@@ -130,7 +151,7 @@ public class SignUp {
             java.net.URL url = new java.net.URL(Email);
             Scanner input = new Scanner(url.openStream());
         } catch (Exception e) {
-            // erorr calssname .setErorr (" the gmail isn't correct");
+             error.setError("the gmail isn't correct");
             return false;
         }
 

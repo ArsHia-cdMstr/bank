@@ -1,21 +1,39 @@
 package sample;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Account  {
+public class Account extends User implements Serializable {
 
-    protected static int AccountNumber = 0;
+    protected String alias;
     protected int balance ;
-    protected Date AccountDateCreated;
+    protected long AccountDateCreated;
     protected String AccountPassword;
     protected ArrayList<MoneyTransfer> moneyTransfersList = new ArrayList<>();
+    protected int AccountNum;
 
     protected Account(int balance, String AccountPassword) {
         this.balance = balance;
         this.AccountPassword = AccountPassword;
-        this.AccountDateCreated = new Date(System.currentTimeMillis());
-        AccountNumber++;
+        this.AccountDateCreated = System.currentTimeMillis();
+        AccountNum = DataBase.accountNumber();
+        NumberOfUserAccount++;
+        AccountNumbersOfUser.add(AccountNum);
+        alias = "Account" + NumberOfUserAccount;
+        AliasesOfUser.add(alias);
+        DataBase.printAccount(this);
+        DataBase.printAlias(this);
+    }
+
+    public void changeAlias(String defaultAlias, String newAlias){
+        if (!AliasesOfUser.contains(defaultAlias))
+            error.setError("you haven't build this account");
+        else {
+            AliasesOfUser.remove(defaultAlias);
+            AliasesOfUser.add(newAlias);
+            DataBase.printAlias(this);
+        }
     }
 
     protected Account( String AccountPassword) {
@@ -30,14 +48,19 @@ public class Account  {
 
     // withdraw method to withdraw the account balance
     protected void withdraw (int withdraw){
-        if (withdraw > balance)
-            /* Error.setError (" the balanc is less than the withdraw") ;*/
+
+        if (withdraw > balance) {
+            error.setError(" the balanc is less than the withdraw");
             return;
+        }
+
         balance -= withdraw ;
         moneyTransfersList.add(new MoneyTransfer("Withdraw", balance));
 
     }
 
+    // we save Money transfers info
+    // in objects of this class
     class MoneyTransfer {
 
         int transferNumber;
@@ -49,7 +72,7 @@ public class Account  {
             this.transferType = transferType;
             transferDate = new Date(System.currentTimeMillis());
             this.remain = remain;
-            transferNumber = dataBase.transfeNumber();
+            transferNumber = DataBase.transfeNumber();
         }
 
         @Override
@@ -62,4 +85,6 @@ public class Account  {
                     ;
         }
     }
+
+
 }

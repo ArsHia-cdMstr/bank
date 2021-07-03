@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="806.0" prefWidth="1211.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OpeningAccount">
+   <children>
+      <ImageView fitHeight="822.0" fitWidth="1239.0" layoutX="-7.0" nodeOrientation="INHERIT" opacity="0.47" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Project/2/001.jpg" />
+         </image>
+      </ImageView>
+      <ChoiceBox fx:id="Ch1" layoutX="747.0" layoutY="170.0" prefHeight="86.0" prefWidth="325.0" />
+      <Button fx:id="btnExit" contentDisplay="TOP" graphicTextGap="6.0" layoutX="29.0" layoutY="743.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#pressExit" prefHeight="54.0" prefWidth="81.0" text="Exit" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="System Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="0.07" contrast="0.1" hue="0.07" saturation="0.69" />
+         </effect>
+      </Button>
+      <Button contentDisplay="TOP" defaultButton="true" graphicTextGap="6.0" layoutX="29.0" layoutY="36.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="118.0" prefWidth="325.0" text="Oppening new Account" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="System Italic" size="26.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="0.07" contrast="0.1" hue="-0.16" saturation="1.0" />
+         </effect>
+      </Button>
+      <Label layoutX="778.0" layoutY="95.0" text="type of Account">
+         <font>
+            <Font name="System Italic" size="39.0" />
+         </font>
+      </Label>
+      <Label layoutX="729.0" layoutY="331.0" prefHeight="54.0" prefWidth="361.0" text="Password of Account">
+         <font>
+            <Font name="System Italic" size="39.0" />
+         </font>
+      </Label>
+      <PasswordField layoutX="654.0" layoutY="411.0" prefHeight="66.0" prefWidth="231.0" promptText="Password">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </PasswordField>
+      <PasswordField layoutX="957.0" layoutY="411.0" prefHeight="66.0" prefWidth="231.0" promptText="confirm">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </PasswordField>
+      <Label layoutX="770.0" layoutY="554.0" prefHeight="54.0" prefWidth="361.0" text="alias of Account">
+         <font>
+            <Font name="System Italic" size="39.0" />
+         </font>
+      </Label>
+      <TextField layoutX="794.0" layoutY="650.0" prefHeight="72.0" prefWidth="231.0" promptText="alias of Account">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
