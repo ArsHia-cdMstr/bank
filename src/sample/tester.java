@@ -13,5 +13,7 @@ public class tester {
 //       DataBase.print(account);
 //       System.out.println(account);
 //        System.out.println(DataBase.readAccount("object"));
+        System.out.println(DataBase.isNationalCodeExist("0123456789"));
+
     }
 }

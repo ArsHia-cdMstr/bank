@@ -93,11 +93,11 @@ public class DataBase {
         }
     }
     public static boolean isNationalCodeExist (String username){
-        File file = new File(username+"/");
+        File file = new File("Users/" + username);
         if(file.isDirectory()){
+            error.setError("you have signed up before please go to sign in page ");
             return true;
         }else {
-            error.setError("you have signed up before please go to sign in page ");
             return false;
         }
     }
@@ -131,6 +131,5 @@ public class DataBase {
 //    public static Integer userNumber (){return givefileNumber(1,"UserNumber"); };
     public static Integer accountNumber (){return givefileNumber(1000,"AccountNumber"); }
     public static Integer transfeNumber (){return givefileNumber(1000,"TransferNumber"); }
-
 
 }

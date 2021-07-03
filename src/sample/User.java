@@ -50,12 +50,6 @@ public class User implements Serializable {
     }
 
     void makeThisUserDir(String username) {
-
-        //make sure that Users directoru exists
-        File UserDir = new File("Users");
-        if (!UserDir.exists())
-            UserDir.mkdir();
-
         //make "username" directory in Users Direcrory
         File usernamefile = new File("Users", username);
         usernamefile.mkdir();
