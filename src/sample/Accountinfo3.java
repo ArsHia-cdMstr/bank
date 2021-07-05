@@ -2,34 +2,39 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import server.DataBase;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Accountinfo3 {
+public class Accountinfo3 implements Initializable {
 
 
         @FXML private AnchorPane pene1;
 
         @FXML private Button btnExit;
 
-        @FXML private Label txtType;
+        @FXML private Label txtType = new Label();
 
         @FXML private Button btnBalance;
 
         @FXML private Button btnList;
 
-        @FXML private Label txtAcountNum;
+        @FXML private Label txtAcountNum = new Label();
 
-        @FXML private Label txtAlias;
+        @FXML private Label txtAlias = new Label();
 
         @FXML private Button btnBack;
 
+        private int balance;
         @FXML
         void pressBack(ActionEvent event) throws IOException {
                 Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -42,7 +47,7 @@ public class Accountinfo3 {
 
         @FXML
         void pressBalance(ActionEvent event) {
-
+                error.setInfo("balance :  " + balance  );
         }
 
         @FXML
@@ -55,4 +60,12 @@ public class Accountinfo3 {
 
         }
 
-    }
+        @Override
+        public void initialize(URL location, ResourceBundle resources) {
+                balance = AccountManagement.choosenAccount.getBalance();
+                System.out.println(balance);
+                txtType.setText(AccountManagement.choosenAccount.getClass().getSimpleName());
+                txtAcountNum.setText(String.valueOf(AccountManagement.choosenAccount.AccountNum));
+                txtAlias.setText(String.valueOf(AccountManagement.choosenAccount.alias));
+        }
+}

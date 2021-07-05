@@ -1,5 +1,7 @@
 package server;
 
+import sample.SignUp;
+
 import java.io.Serializable;
 
 public class LongTermAccount extends Account implements Serializable {
@@ -9,7 +11,7 @@ public class LongTermAccount extends Account implements Serializable {
 
     public LongTermAccount(int balance, String AccountPassword) {
         super(balance, AccountPassword);
-        DataBase.printAccount(this);
+        DataBase.printnewAccount(DataBase.user.NationalCode,this);
     }
 
     public LongTermAccount(String AccountPassword) {
@@ -28,6 +30,7 @@ public class LongTermAccount extends Account implements Serializable {
 
     }
 
+    @Override
     public int getBalance(){
         IncreasProfitToBalance();
         return balance;

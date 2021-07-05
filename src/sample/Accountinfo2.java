@@ -32,6 +32,11 @@ public class Accountinfo2 implements Initializable {
 
     @FXML
     void pressEnter(ActionEvent event) throws IOException {
+        if (!(txtPassword.getText().equals(AccountManagement.choosenAccount.AccountPassword))){
+            error.setError("password is invalid!");
+            return;
+        }
+
         Stage stage = (Stage) btnEnter.getScene().getWindow();
         stage.close();
         Stage primaryStage = new Stage();
@@ -45,6 +50,7 @@ public class Accountinfo2 implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        lblAlias.setText(AccountManagement.choosenAccount.alias);
+        lblAccNumber.setText(String.valueOf(AccountManagement.choosenAccount.AccountNum));
     }
 }
-

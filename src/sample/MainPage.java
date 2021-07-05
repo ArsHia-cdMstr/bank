@@ -53,8 +53,13 @@ public class MainPage {
     }
 
     @FXML
-    void pressCloseAnAccount(ActionEvent event) {
-
+    void pressCloseAnAccount(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnCloseAnAccount.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("CloseAccount.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML
@@ -73,13 +78,23 @@ public class MainPage {
     }
 
     @FXML
-    void pressLoanRequest(ActionEvent event) {
-
+    void pressLoanRequest(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnLoanRequest.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("LoanRequest.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML
-    void pressPayingBorrow(ActionEvent event) {
-
+    void pressPayingBorrow(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnPayingBorrow.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("PayingBorrow.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
 

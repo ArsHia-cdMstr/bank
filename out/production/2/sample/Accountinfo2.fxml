@@ -24,7 +24,7 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <Label fx:id="lblAlias" alignment="CENTER" layoutX="102.0" layoutY="1.0" prefHeight="123.0" prefWidth="209.0" text="alias">
+      <Label fx:id="lblAlias" alignment="CENTER" layoutX="163.0" layoutY="1.0" prefHeight="123.0" prefWidth="209.0" text="alias">
          <font>
             <Font size="43.0" />
          </font>

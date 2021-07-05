@@ -41,9 +41,14 @@ public class FirstPage {
     }
 
     @FXML
-    void pressExit(ActionEvent event) {
-        System.exit(0);
-
+    void pressExit(ActionEvent event) throws IOException {
+        //System.exit(0);
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("LoanRequest.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML

@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import server.*;
 
 
-public class SignUp {
+public class SignUp extends Signin {
 
     @FXML private TextField txtFirstName;
 
@@ -39,6 +39,8 @@ public class SignUp {
     @FXML private TextField txtPassword1;
 
     @FXML private TextField txtPassword2;
+
+    public static User user;
 
     @FXML
     void pressBack(ActionEvent event) throws IOException {
@@ -65,12 +67,14 @@ public class SignUp {
         if (!UserDir.exists())
             UserDir.mkdir();
 
-        if (!signUpIsCorrect())
-            return;
+//        if (!signUpIsCorrect())
+//            return;
 
         //creating a user account
-        new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
+        user = new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
                 ,txtNationalCode.getText(),txtEmail.getText(),txtPhone.getText());
+
+        DataBase.userSaver(user);
 
         // go to next page
         Stage stage =(Stage) btnNext.getScene().getWindow();
@@ -79,6 +83,9 @@ public class SignUp {
         Parent root = FXMLLoader.load(getClass().getResource("OpeningAccount.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        error.setInfo("your UserAccount created!");
+
 
     }
 

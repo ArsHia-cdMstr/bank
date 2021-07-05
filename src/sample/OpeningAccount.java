@@ -9,29 +9,51 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import server.DataBase;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import server.*;
 
-public class OpeningAccount implements Initializable {
 
-    @FXML private Button btnExit = new Button();
+public class OpeningAccount extends Signin implements Initializable {
 
-    @FXML private ChoiceBox Ch1 = new ChoiceBox();
+    @FXML
+    private Button btnExit = new Button();
 
-    @FXML private Button btnBack;
+    @FXML
+    private ChoiceBox Ch1 = new ChoiceBox();
 
-    @FXML private Button btnNext;
+    @FXML
+    private Button btnBack = new Button();
 
+    @FXML
+    private Button btnNext = new Button();
+
+    @FXML
+    private TextField txtPassword1 = new TextField();
+
+    @FXML
+    private TextField txtPassword2 = new TextField();
+
+    @FXML
+    private TextField txtAlias = new TextField();
+
+    @FXML
+    private TextField txtInitialBalance = new TextField();
+
+    private char Type ;
 
     @FXML
     void pressBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnBack.getScene().getWindow();
         stage.close();
         Stage primaryStage = new Stage();
-        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("FirstPage.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -39,7 +61,59 @@ public class OpeningAccount implements Initializable {
 
     @FXML
     void pressNext(ActionEvent event) throws IOException {
-        ///////////check////////////////
+        //check that passwords are the same or not
+        if ( !txtPassword1.getText().equals(txtPassword2.getText())){
+            error.setError("passwords aren't the same");
+            return;
+        }
+
+        try {
+            int initialBalance = Integer.parseInt(txtInitialBalance.getText());
+        }catch (NumberFormatException e){
+            error.setError("pleas Enter the initial balance!");
+            return;
+        }
+
+        // check that initial balance isn't null or letter
+        String choice = (String) Ch1.getValue();
+
+        switch (choice){
+            case "Current account":
+                Type = 'c';
+                break;
+            case "Long term account":
+                Type = 'l';
+                break;
+            case "Short term account":
+                Type = 's';
+                break;
+        }
+        Account account;
+        switch (Type){
+            case 'c' :
+                account= new CurrentAccount(Integer.parseInt(txtInitialBalance.getText()),txtPassword1.getText());
+                DataBase.printnewAccount(DataBase.user.NationalCode, account);
+                break;
+            case 'l' :
+                account = new LongTermAccount(Integer.parseInt(txtInitialBalance.getText()),txtPassword1.getText());
+                DataBase.printnewAccount(DataBase.user.NationalCode,account);
+                break;
+            case 's' :
+                account = new ShortTermAccount(Integer.parseInt(txtInitialBalance.getText()),txtPassword1.getText());
+                DataBase.printnewAccount(DataBase.user.NationalCode,account);
+                break;
+            default:
+                error.setError("please use the type of account");
+                return;
+        }
+
+        if ( !(txtAlias.getText().equals(null))  ) {
+            if(!(account.changeAlias(account.alias, txtAlias.getText(),account))) {
+                return;
+            }
+        }
+
+        new AccountNumberInfo(account, DataBase.user.NationalCode);
 
 
         error.setInfo("Welcome" + "\n" + "Your account opening has been successfully!");
@@ -58,23 +132,10 @@ public class OpeningAccount implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         Ch1.getItems().add("Current account");
         Ch1.getItems().add("Long term account");
         Ch1.getItems().add("Short term account");
-    }
 
-
-    public void SelectType() throws IOException {
-        String choice = (String) Ch1.getValue();
     }
 }
-
-
-
-
-
-
-
-
-
-

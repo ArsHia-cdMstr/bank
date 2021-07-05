@@ -1,55 +1,63 @@
 package server;
 
+import sample.SignUp;
 import sample.error;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Account extends User implements Serializable {
+public class Account implements Serializable {
 
-    protected String alias;
+    public String alias;
     protected int balance ;
     protected long AccountDateCreated;
-    protected String AccountPassword;
+    public String AccountPassword;
     protected ArrayList<MoneyTransfer> moneyTransfersList = new ArrayList<>();
-    protected int AccountNum;
+    public int AccountNum;
 
     protected Account(int balance, String AccountPassword) {
         this.balance = balance;
         this.AccountPassword = AccountPassword;
         this.AccountDateCreated = System.currentTimeMillis();
         AccountNum = DataBase.accountNumber();
-        NumberOfUserAccount++;
-        AccountNumbersOfUser.add(AccountNum);
-        alias = "Account" + NumberOfUserAccount;
-        AliasesOfUser.add(alias);
-        DataBase.printAccount(this);
-        DataBase.printAlias(this);
+        DataBase.user.NumberOfUserAccount++;
+        DataBase.user.AccountNumbersOfUser.add(AccountNum);
+        alias = "Account" + DataBase.user.NumberOfUserAccount;
+        DataBase.user.AliasesOfUser.add(alias);
+        DataBase.printnewAccount(DataBase.user.NationalCode,this);
     }
-
-    public void changeAlias(String defaultAlias, String newAlias){
-        if (!AliasesOfUser.contains(defaultAlias))
+    //change alias from alias default to new alias
+    public boolean changeAlias(String defaultAlias, String newAlias, Account account){
+        if (DataBase.user.AliasesOfUser.contains(newAlias)){
+            error.setError("this alias already exists");
+            return false;
+        }
+        if ( !DataBase.user.AliasesOfUser.contains(defaultAlias)){
             error.setError("you haven't build this account");
+            return false;
+        }
         else {
-            AliasesOfUser.remove(defaultAlias);
-            AliasesOfUser.add(newAlias);
-            DataBase.printAlias(this);
+            DataBase.user.AliasesOfUser.remove(defaultAlias);
+            DataBase.user.AliasesOfUser.add(newAlias);
+            account.alias = newAlias;
+            DataBase.printAccount(DataBase.user.NationalCode, account, defaultAlias);
+            return true;
         }
     }
 
-    protected Account( String AccountPassword) {
+    public Account( String AccountPassword) {
         this(0,AccountPassword);
     }
 
     // depsit method to deposit the account balance
-    protected void Deposit (int deposit ) {
+    public void Deposit (int deposit ) {
         balance += deposit;
-    moneyTransfersList.add(new MoneyTransfer("Deposit", balance));
+        moneyTransfersList.add(new MoneyTransfer("Deposit", balance));
     }
 
     // withdraw method to withdraw the account balance
-    protected void withdraw (int withdraw){
+    public void withdraw (int withdraw){
 
         if (withdraw > balance) {
             error.setError(" the balanc is less than the withdraw");
@@ -62,7 +70,7 @@ public class Account extends User implements Serializable {
     }
 
     // we save Money transfers info
-    // in objects of this class
+// in objects of this class
     class MoneyTransfer {
 
         int transferNumber;
@@ -89,4 +97,15 @@ public class Account extends User implements Serializable {
     }
 
 
+    public int getBalance(){
+        return 12345;
+    }
+
+
+    public  void setBalance(int balance1){
+        balance = balance1;
+    }
+
 }
+
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoanRequest">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane fx:id="pene" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <ImageView fitHeight="824.0" fitWidth="1225.0" layoutX="-31.0" layoutY="-21.0" nodeOrientation="INHERIT" opacity="0.47" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../001.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnExit" contentDisplay="TOP" graphicTextGap="6.0" layoutX="11.0" layoutY="726.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#pressExit" prefHeight="58.0" prefWidth="93.0" text="Exit" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
+                     <effect>
+                        <ColorAdjust brightness="0.07" contrast="0.1" hue="0.07" saturation="0.69" />
+                     </effect>
+                  </Button>
+                  <Label layoutX="37.0" layoutY="-21.0" prefHeight="166.0" prefWidth="464.0" text="loan request">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="46.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnBack" contentDisplay="TOP" graphicTextGap="6.0" layoutX="131.0" layoutY="726.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#pressBack" prefHeight="58.0" prefWidth="93.0" text="Back" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
+                     <effect>
+                        <ColorAdjust brightness="0.07" contrast="0.1" hue="0.07" saturation="0.69" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnLoan1" layoutX="247.0" layoutY="244.0" mnemonicParsing="false" onAction="#pressLoan1" prefHeight="123.0" prefWidth="343.0" text="6 months - 1000$ - 15%">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <effect>
+                        <ColorAdjust contrast="-0.26" hue="0.55" saturation="0.41" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnLoan2" layoutX="757.0" layoutY="244.0" mnemonicParsing="false" onAction="#pressLoan2" prefHeight="123.0" prefWidth="343.0" text="12month - 15000$ - 25%">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <effect>
+                        <ColorAdjust contrast="-0.26" hue="0.55" saturation="0.41" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnLoan3" layoutX="757.0" layoutY="422.0" mnemonicParsing="false" onAction="#pressLoan3" prefHeight="123.0" prefWidth="343.0" text="8month - 12500$ - 20%">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <effect>
+                        <ColorAdjust contrast="-0.26" hue="0.55" saturation="0.41" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnLoan4" layoutX="247.0" layoutY="422.0" mnemonicParsing="false" onAction="#pressLoan4" prefHeight="123.0" prefWidth="343.0" text="24month - 20000$ - 24%">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <effect>
+                        <ColorAdjust contrast="-0.26" hue="0.55" saturation="0.41" />
+                     </effect>
+                  </Button>
+                  <Text layoutX="307.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select one of the following options!" wrappingWidth="799.72265625">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

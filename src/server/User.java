@@ -6,15 +6,14 @@ import java.util.Scanner;
 
 public class User implements Serializable {
 
-    private int numberOfAPersonAccount;
-//    private static int userNumber;
-    private String FirstName;
-    private String LastName;
+    //    private static int userNumber;
+    public String FirstName;
+    public String LastName;
     public String Password;
     public String NationalCode;
-    private String Email;
-    private String Phone;
-    public int NumberOfUserAccount = 0;
+    public String Email;
+    public String Phone;
+    public int NumberOfUserAccount;
     public ArrayList<Integer> AccountNumbersOfUser = new ArrayList<>();
     public ArrayList<String> AliasesOfUser = new ArrayList<>();
 
@@ -28,6 +27,7 @@ public class User implements Serializable {
         NationalCode = nationalCode;
         Email = email;
         Phone = phone;
+        NumberOfUserAccount = 0;
         //make a dir in Users dir in the name
         // of national code dir
         makeThisUserDir(nationalCode);
@@ -37,7 +37,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "numberOfAPersonAccount=" + numberOfAPersonAccount +
                 ", FirstName='" + FirstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", Password='" + Password + '\'' +

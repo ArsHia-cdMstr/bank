@@ -1,5 +1,7 @@
 package server;
 
+import sample.SignUp;
+
 import java.io.Serializable;
 
 public class ShortTermAccount extends Account implements Serializable {
@@ -10,7 +12,7 @@ public class ShortTermAccount extends Account implements Serializable {
 
     public ShortTermAccount(int balance, String AccountPassword) {
         super(balance, AccountPassword);
-        DataBase.printAccount(this);
+        DataBase.printnewAccount(DataBase.user.NationalCode,this);
     }
 
     public ShortTermAccount(String AccountPassword) {
@@ -29,6 +31,7 @@ public class ShortTermAccount extends Account implements Serializable {
 
     }
 
+    @Override
     public int getBalance(){
         IncreasProfitToBalance();
         return balance;
