@@ -61,7 +61,7 @@ public class OpeningAccount extends Signin implements Initializable {
 
     @FXML
     void pressNext(ActionEvent event) throws IOException {
-        //check that passwords are the same or not
+//check that passwords are the same or not
         if ( !txtPassword1.getText().equals(txtPassword2.getText())){
             error.setError("passwords aren't the same");
             return;
@@ -74,7 +74,7 @@ public class OpeningAccount extends Signin implements Initializable {
             return;
         }
 
-        // check that initial balance isn't null or letter
+// check that initial balance isn't null or letter
         String choice = (String) Ch1.getValue();
 
         switch (choice){
@@ -92,28 +92,26 @@ public class OpeningAccount extends Signin implements Initializable {
         switch (Type){
             case 'c' :
                 account= new CurrentAccount(Integer.parseInt(txtInitialBalance.getText()),txtPassword1.getText());
-                DataBase.printnewAccount(DataBase.user.NationalCode, account);
+                DataBase.printnewAccount( account);
                 break;
             case 'l' :
                 account = new LongTermAccount(Integer.parseInt(txtInitialBalance.getText()),txtPassword1.getText());
-                DataBase.printnewAccount(DataBase.user.NationalCode,account);
+                DataBase.printnewAccount(account);
                 break;
             case 's' :
                 account = new ShortTermAccount(Integer.parseInt(txtInitialBalance.getText()),txtPassword1.getText());
-                DataBase.printnewAccount(DataBase.user.NationalCode,account);
+                DataBase.printnewAccount(account);
                 break;
             default:
                 error.setError("please use the type of account");
                 return;
         }
 
-        if ( !(txtAlias.getText().equals(null))  ) {
+        if ( !(txtAlias.getText().equals(null)) ) {
             if(!(account.changeAlias(account.alias, txtAlias.getText(),account))) {
                 return;
             }
         }
-
-        new AccountNumberInfo(account, DataBase.user.NationalCode);
 
 
         error.setInfo("Welcome" + "\n" + "Your account opening has been successfully!");

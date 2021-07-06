@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import server.Loan;
+import sun.swing.AccumulativeRunnable;
 
 import java.io.IOException;
 
@@ -44,21 +46,23 @@ public class LoanRequest {
     @FXML
     void pressLoan1(ActionEvent event) {
 
+        Loan loan = new Loan (1.15, 1000 , 6 , AccountManagement.choosenAccount.AccountNum);
     }
 
     @FXML
     void pressLoan2(ActionEvent event) {
 
+        Loan loan = new Loan(1.25, 15000, 12, AccountManagement.choosenAccount.AccountNum);
     }
 
     @FXML
     void pressLoan3(ActionEvent event) {
-
+        Loan loan = new Loan( 1.20,12500, 8, AccountManagement.choosenAccount.AccountNum );
     }
 
     @FXML
     void pressLoan4(ActionEvent event) {
-
+        Loan loan = new Loan(1.24, 20000, 24, AccountManagement.choosenAccount.AccountNum);
     }
 
 }

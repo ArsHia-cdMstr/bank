@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="514.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Accountinfo2">
+<AnchorPane prefHeight="514.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Accountinfo2">
    <children>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="96.0" prefHeight="123.0" prefWidth="181.0" text="account number :" textFill="#ff00006e">
+      <Label alignment="CENTER" layoutY="96.0" prefHeight="123.0" prefWidth="432.0" text="account number :" textFill="#ff00006e">
          <font>
             <Font size="23.0" />
          </font>
@@ -24,7 +24,7 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <Label fx:id="lblAlias" alignment="CENTER" layoutX="163.0" layoutY="1.0" prefHeight="123.0" prefWidth="209.0" text="alias">
+      <Label fx:id="lblAlias" layoutX="163.0" layoutY="1.0" prefHeight="123.0" prefWidth="209.0" text="alias">
          <font>
             <Font size="43.0" />
          </font>
@@ -37,7 +37,7 @@
             <ColorAdjust />
          </effect>
       </Label>
-      <Label fx:id="lblAccNumber" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="141.0" prefHeight="185.0" prefWidth="401.0" text="acc nomber" textAlignment="CENTER">
+      <Label fx:id="lblAccNumber" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="141.0" prefHeight="185.0" prefWidth="431.0" text="acc nomber" textAlignment="CENTER">
          <font>
             <Font size="39.0" />
          </font>

@@ -49,6 +49,7 @@ public class Signin  implements Initializable {
         String passInput = txtPassword.getText();
 
         if (passInput.equals(passWord)) {
+            System.out.println("DataBase.user.NumberOfUserAccount = " + DataBase.user.NumberOfUserAccount);
             count = DataBase.user.NumberOfUserAccount;
 
             if (count == 0){

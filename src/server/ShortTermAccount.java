@@ -12,7 +12,7 @@ public class ShortTermAccount extends Account implements Serializable {
 
     public ShortTermAccount(int balance, String AccountPassword) {
         super(balance, AccountPassword);
-        DataBase.printnewAccount(DataBase.user.NationalCode,this);
+        DataBase.printnewAccount(this);
     }
 
     public ShortTermAccount(String AccountPassword) {

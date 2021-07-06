@@ -1,17 +1,23 @@
 package sample;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import server.DataBase;
+import server.Loan.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import server.Loan;
 
-public class MainPage {
+public class MainPage implements Initializable {
 
 
     @FXML private Button btnExit;
@@ -73,8 +79,13 @@ public class MainPage {
     }
 
     @FXML
-    void pressFundTransfers(ActionEvent event) {
-
+    void pressFundTransfers(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnLoanRequest.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("FundTransfers.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML
@@ -98,4 +109,8 @@ public class MainPage {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        DataBase.readLoan(AccountManagement.choosenAccount.AccountNum);
+    }
 }

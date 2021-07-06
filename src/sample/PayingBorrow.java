@@ -17,29 +17,21 @@ import java.util.Random;
 public class PayingBorrow {
 
 
-    @FXML
-    private AnchorPane pene;
+    @FXML private AnchorPane pene = new AnchorPane();
 
-    @FXML
-    private Button btnExit;
+    @FXML private Button btnExit = new Button();
 
-    @FXML
-    private Button btnBack;
+    @FXML private Button btnBack = new Button();
 
-    @FXML
-    private Button btnProcessing;
+    @FXML private Button btnProcessing = new Button();
 
-    @FXML
-    private Button btnPay;
+    @FXML private Button btnPay = new Button();
 
-    @FXML
-    private TextField txtBillID;
+    @FXML private TextField txtBillID = new TextField();
 
-    @FXML
-    private TextField txtpaymentID;
+    @FXML private TextField txtpaymentID = new TextField();
 
-    @FXML
-    private Text txtAmount;
+    @FXML private Text txtAmount = new Text();
 
     private boolean checkPay = false;
     private boolean checkProcessing = true;
@@ -62,6 +54,9 @@ public class PayingBorrow {
     @FXML
     void pressPay(ActionEvent event) throws IOException {
         if (checkPay) {
+
+            AccountManagement.choosenAccount.withdraw(Integer.parseInt(txtAmount.getText()));
+
             error.setInfo("Your bill has been paid!"+"\n"+
                     txtAmount.getText() + "$ has been deducted from your account" );
             Stage stage = (Stage) btnPay.getScene().getWindow();
@@ -70,6 +65,7 @@ public class PayingBorrow {
             Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
+
         }
     }
     @FXML

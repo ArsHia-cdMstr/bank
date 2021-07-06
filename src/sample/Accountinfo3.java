@@ -34,7 +34,6 @@ public class Accountinfo3 implements Initializable {
 
         @FXML private Button btnBack;
 
-        private int balance;
         @FXML
         void pressBack(ActionEvent event) throws IOException {
                 Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -47,7 +46,7 @@ public class Accountinfo3 implements Initializable {
 
         @FXML
         void pressBalance(ActionEvent event) {
-                error.setInfo("balance :  " + balance  );
+                error.setInfo("balance : " + AccountManagement.choosenAccount.getBalance() + "$");
         }
 
         @FXML
@@ -62,8 +61,6 @@ public class Accountinfo3 implements Initializable {
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
-                balance = AccountManagement.choosenAccount.getBalance();
-                System.out.println(balance);
                 txtType.setText(AccountManagement.choosenAccount.getClass().getSimpleName());
                 txtAcountNum.setText(String.valueOf(AccountManagement.choosenAccount.AccountNum));
                 txtAlias.setText(String.valueOf(AccountManagement.choosenAccount.alias));

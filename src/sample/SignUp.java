@@ -62,21 +62,21 @@ public class SignUp extends Signin {
     @FXML
     void pressNext(ActionEvent event) throws IOException {
 
-        //make sure that Users directory exists
+//make sure that Users directory exists
         File UserDir = new File("Users");
         if (!UserDir.exists())
             UserDir.mkdir();
 
-//        if (!signUpIsCorrect())
-//            return;
+// if (!signUpIsCorrect())
+// return;
 
-        //creating a user account
+//creating a user account
         user = new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
                 ,txtNationalCode.getText(),txtEmail.getText(),txtPhone.getText());
 
         DataBase.userSaver(user);
 
-        // go to next page
+// go to next page
         Stage stage =(Stage) btnNext.getScene().getWindow();
         stage.close();
         Stage primaryStage=new Stage();
@@ -91,30 +91,30 @@ public class SignUp extends Signin {
 
     boolean signUpIsCorrect(){
 
-        //check that the passwords are the same or not
+//check that the passwords are the same or not
         boolean isThePasswordsTheSame = txtPassword1.getText().equals(txtPassword2.getText());
         if(!isThePasswordsTheSame) {
-             error.setError("the passwords aren't the same");
+            error.setError("the passwords aren't the same");
             return false;
         }
 
-        //check that the gmail is correct or not
+//check that the gmail is correct or not
         if (!isEmailCorrect(txtEmail.getText()))
             return false;
 
-        //check the user have already signed up or not
+//check the user have already signed up or not
         if ( DataBase.isNationalCodeExist(txtNationalCode.getText()) )
             return false;
 
-        // check that national number has only 10 index
+// check that national number has only 10 index
         if (!nationalNumHas10Index(txtNationalCode.getText()))
             return false;
 
-        //check that first/last name are only letters
+//check that first/last name are only letters
         if (!(isonlyLetter(txtFirstName.getText()) && isonlyLetter(txtLastName.getText())))
             return false;
 
-        //check that national code is only numberic
+//check that national code is only numberic
         if (!isOnlyNumber(txtNationalCode.getText()))
             return false;
 
@@ -126,7 +126,7 @@ public class SignUp extends Signin {
         for (int i = 0; i < name.length(); i++) {
 
             if(!Character.isLetter(name.charAt(i))){
-             error.setError("the first name of last name aren't letters \n pleas enter only letters ");
+                error.setError("the first name of last name aren't letters \n pleas enter only letters ");
                 return false;
             }
         }
@@ -143,20 +143,20 @@ public class SignUp extends Signin {
         return true;
     }
     boolean isNumber(char ch){
-        return  ('0' <= (int)ch && (int)ch <= '9');
+        return ('0' <= (int)ch && (int)ch <= '9');
     }
     boolean nationalNumHas10Index (String nationalNum){
-              if (nationalNum.length() == 10)
-                  return  true;
-              else {
-                  error.setError("natioanl number haven't 10 index");
-                    return false;
-              }
+        if (nationalNum.length() == 10)
+            return true;
+        else {
+            error.setError("natioanl number haven't 10 index");
+            return false;
+        }
     }
     boolean isEmailCorrect (String Email){
 
         try {
-            // at the end of the
+// at the end of the
             boolean isTheEndOfEmailCorrect = Email.substring(Email.lastIndexOf(".")).equals(".com") &&
                     Email.contains("@");
             if (!isTheEndOfEmailCorrect) {
@@ -167,19 +167,18 @@ public class SignUp extends Signin {
             error.setError("the gmail isn't correct");
             return false;
         }
-//            Email = "https://WWW." + Email;
-//        try {
-//            java.net.URL url = new java.net.URL(Email);
-//            Scanner input = new Scanner(url.openStream());
-//        } catch (Exception e) {
-//            return false;
-//        }
+// Email = "https://www." + Email;
+// try {
+// java.net.URL url = new java.net.URL(Email);
+// Scanner input = new Scanner(url.openStream());
+// } catch (Exception e) {
+// return false;
+// }
 
         return true;
     }
 
 }
-
 
 
 

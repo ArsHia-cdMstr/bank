@@ -25,7 +25,7 @@ public class Account implements Serializable {
         DataBase.user.AccountNumbersOfUser.add(AccountNum);
         alias = "Account" + DataBase.user.NumberOfUserAccount;
         DataBase.user.AliasesOfUser.add(alias);
-        DataBase.printnewAccount(DataBase.user.NationalCode,this);
+        DataBase.printnewAccount(this);
     }
     //change alias from alias default to new alias
     public boolean changeAlias(String defaultAlias, String newAlias, Account account){
@@ -41,7 +41,7 @@ public class Account implements Serializable {
             DataBase.user.AliasesOfUser.remove(defaultAlias);
             DataBase.user.AliasesOfUser.add(newAlias);
             account.alias = newAlias;
-            DataBase.printAccount(DataBase.user.NationalCode, account, defaultAlias);
+            DataBase.printnewAccount(account);
             return true;
         }
     }

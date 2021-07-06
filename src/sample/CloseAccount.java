@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import server.Account;
+import server.DataBase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +35,7 @@ public class CloseAccount implements Initializable {
 
     @FXML private Button btnNext;
 
+    private int balance;
     @FXML void pressBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnBack.getScene().getWindow();
         stage.close();
@@ -50,7 +53,7 @@ public class CloseAccount implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        int balance = 10;
+        balance = AccountManagement.choosenAccount.getBalance();
 
         boxDistination.getItems().add("15454165");
         boxDistination.getItems().add("16515165");
@@ -72,9 +75,9 @@ public class CloseAccount implements Initializable {
     @FXML
     void pressNext(ActionEvent event) throws IOException {
 
-        if (!boxDistination.getValue().equals(null)){
-            txtDistination.setText((String) boxDistination.getValue());
-        }
+//        if (!boxDistination.getValue().equals(null)){
+//            txtDistination.setText((String) boxDistination.getValue());
+//        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("");
@@ -83,20 +86,26 @@ public class CloseAccount implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult().getText().equals("OK")){
+
+            Account account;
+            account = DataBase.readAccount(Integer.valueOf(txtDistination.getText()));
+            if (!(account.AccountPassword.equals(txtPassword.getText()))){
+                error.setError("your password is invalid!");
+                return;
+            }
+            account.Deposit(balance);
+
+            DataBase.printnewAccount(account);
+
+
+
             Stage stage = (Stage) btnNext.getScene().getWindow();
             stage.close();
             Stage primaryStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("AccountManagement.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
-            /////////////////
 
-
-
-            //deleting
-
-
-            ///////////////////
         }
 
     }
