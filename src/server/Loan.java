@@ -3,38 +3,53 @@ package server;
 import server.Account;
 import server.DataBase;
 
-public class Loan {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Loan implements Serializable {
     double loanRate;
     int loanAmount;
-    int amountOfPaymentDeadlineInMonth;
+    int amountOfPaymentDeadlineInMinute;
     int accountNumber;
     long dateCreated ;
-    public Loan(double loanRate, int loanAmount, int month, int accountNumber) {
+    int remainingMinute;
+    
+    public Loan(double loanRate, int loanAmount, int Minute, int accountNumber) {
         this.loanRate = loanRate;
         this.loanAmount = (int) (loanAmount * loanRate);
-        this.amountOfPaymentDeadlineInMonth = this.loanAmount / month ;
+        this.remainingMinute = Minute;
+        this.amountOfPaymentDeadlineInMinute = this.loanAmount / Minute ;
         this.accountNumber = accountNumber;
         this.dateCreated = System.currentTimeMillis();
-        DataBase.printLoan(accountNumber , this);
+        DataBase.loans.add(this);
+        DataBase.printLoan(DataBase.loans);
     }
-    public void pay (Loan loan){
-        monthDeadLine(String.valueOf(loan.accountNumber), loan.amountOfPaymentDeadlineInMonth);
-    }
-
-    public void monthDeadLine(String accountNum , int withdrawAmount){
-        Account account = DataBase.readAccount(accountNumber);
-        account.withdraw(withdrawAmount);
+     void pay (Loan loan){
+        Account account = DataBase.readAccount(loan.accountNumber);
+        account.withdraw(loan.amountOfPaymentDeadlineInMinute);
 
     }
 
-    public boolean checkDeadLine (long timeNow,int accountNumber){
-        Loan loan = DataBase.readLoan(accountNumber);
-        long diffrenceOfTimesInMonth = (timeNow - loan.dateCreated) / ( 1000 * 60 * 60 *24 * 30) ;
-        if (diffrenceOfTimesInMonth > 1 ){
-            diffrenceOfTimesInMonth --;
-            pay(loan);
-            return true;
+     void checkDeadLine (long timeNow){
+        
+        long diffrenceOfTimesInMinute = (timeNow - dateCreated) / ( 1000 * 60 ) ;
+        if (diffrenceOfTimesInMinute >= 1 ){
+
+            for (int i = 1; i <= diffrenceOfTimesInMinute ; i++)  {
+                diffrenceOfTimesInMinute --;
+                pay(this);
+                remainingMinute--;
+                if (remainingMinute == 0){
+                    DataBase.deleteloan(accountNumber);
+                    return ; 
+                }
+            }
+
+            dateCreated = timeNow ;
         }
-        return false;
+
     }
-}
+
+
+    }
+

@@ -55,7 +55,13 @@ public class Accountinfo3 implements Initializable {
         }
 
         @FXML
-        void pressList(ActionEvent event) {
+        void pressList(ActionEvent event) throws IOException {
+                Stage stage = (Stage) btnList.getScene().getWindow();
+                stage.close();
+                Stage primaryStage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("List.fxml"));
+                primaryStage.setScene(new Scene(root));
+                primaryStage.show();
 
         }
 

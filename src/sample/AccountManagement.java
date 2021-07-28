@@ -76,7 +76,6 @@ public class AccountManagement implements Initializable {
     @FXML
     void pressacc1(ActionEvent event) throws IOException {
         choosenAccount = DataBase.readAccount(accountNumberOfUser.get(0));
-// System.out.println(choosenAccount);
 
         Stage stage = (Stage) btnacc1.getScene().getWindow();
         stage.close();
@@ -145,43 +144,43 @@ public class AccountManagement implements Initializable {
         switch (count){
             case 5:
                 account = DataBase.readAccount(accountNumberOfUser.get(0));
-                btnacc1.setText("alias " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc1.setText("alias :  " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(1));
-                btnacc2.setText("alias " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc2.setText("alias :  " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(2));
-                btnacc3.setText("alias " + aliasesOfUser.get(2) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc3.setText("alias :  " + aliasesOfUser.get(2) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(3));
-                btnacc4.setText("alias " + aliasesOfUser.get(3) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc4.setText("alias :  " + aliasesOfUser.get(3) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(4));
-                btnacc5.setText("alias " + aliasesOfUser.get(4) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc5.setText("alias :  " + aliasesOfUser.get(4) +"\n"+ "acount number : " + account.AccountNum);
                 break;
             case 4:
                 account = DataBase.readAccount(accountNumberOfUser.get(0));
-                btnacc1.setText("alias " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc1.setText("alias :  " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(1));
-                btnacc2.setText("alias " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc2.setText("alias :  " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(2));
-                btnacc3.setText("alias " + aliasesOfUser.get(2) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc3.setText("alias :  " + aliasesOfUser.get(2) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(3));
-                btnacc4.setText("alias " + aliasesOfUser.get(3) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc4.setText("alias :  " + aliasesOfUser.get(3) +"\n"+ "acount number : " + account.AccountNum);
                 break;
             case 3:
                 account = DataBase.readAccount(accountNumberOfUser.get(0));
-                btnacc1.setText("alias " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc1.setText("alias :  " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(1));
-                btnacc2.setText("alias " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc2.setText("alias :  " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(2));
-                btnacc3.setText("alias " + aliasesOfUser.get(2) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc3.setText("alias :  " + aliasesOfUser.get(2) +"\n"+ "acount number : " + account.AccountNum);
                 break;
             case 2:
                 account = DataBase.readAccount(accountNumberOfUser.get(0));
-                btnacc1.setText("alias " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc1.setText("alias :  " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
                 account = DataBase.readAccount(accountNumberOfUser.get(1));
-                btnacc2.setText("alias " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc2.setText("alias :  " + aliasesOfUser.get(1) +"\n"+ "acount number : " + account.AccountNum);
                 break;
             case 1:
                 account = DataBase.readAccount(accountNumberOfUser.get(0));
-                btnacc1.setText("alias " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
+                btnacc1.setText("alias :  " + aliasesOfUser.get(0) +"\n"+ "acount number : " + account.AccountNum);
                 break;
 
         }

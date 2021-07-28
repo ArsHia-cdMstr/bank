@@ -10,11 +10,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import server.Account;
-import server.DataBase;
+import server.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CloseAccount implements Initializable {
@@ -50,24 +50,54 @@ public class CloseAccount implements Initializable {
         System.exit(0);
     }
 
+    int choosenUsedAccount ;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         balance = AccountManagement.choosenAccount.getBalance();
 
-        boxDistination.getItems().add("15454165");
-        boxDistination.getItems().add("16515165");
-        boxDistination.getItems().add("45416516");
+        ArrayList<UsedAccount> usedAccount = AccountManagement.choosenAccount.usedAccount;
+        int sizeOfArrayList = usedAccount.size();
+        switch (sizeOfArrayList) {
+            case 0:
+                break;
+            case 1:
+                boxDistination.getItems().add(usedAccount.get(sizeOfArrayList - 1).Alias);
+                break;
+            case 2:
+                boxDistination.getItems().add(usedAccount.get(sizeOfArrayList - 1).Alias);
+                boxDistination.getItems().add(usedAccount.get(sizeOfArrayList - 2).Alias);
+                break;
+            default:
+                boxDistination.getItems().add(usedAccount.get(sizeOfArrayList - 1).Alias);
+                boxDistination.getItems().add(usedAccount.get(sizeOfArrayList - 2).Alias);
+                boxDistination.getItems().add(usedAccount.get(sizeOfArrayList - 3).Alias);
+                break;
+        }
 
 
+        if (boxDistination.getValue() != null) {
+            String destionationNumber = (String) boxDistination.getValue();
 
+            if (destionationNumber == usedAccount.get(sizeOfArrayList - 1).Alias) {
+                choosenUsedAccount = usedAccount.get(sizeOfArrayList - 1).usedAccountNumber;
+            } else if (destionationNumber == usedAccount.get(sizeOfArrayList - 2).Alias) {
+                choosenUsedAccount = usedAccount.get(sizeOfArrayList - 1).usedAccountNumber;
+            } else if (destionationNumber == usedAccount.get(sizeOfArrayList - 3).Alias) {
+                choosenUsedAccount = usedAccount.get(sizeOfArrayList - 1).usedAccountNumber;
+            }
+
+            if (choosenUsedAccount != 0)
+                txtDistination.setText(String.valueOf(choosenUsedAccount));
+        }
         txtBalance.setText(String.valueOf(balance));
-        if (balance == 0){
+        if (balance == 0) {
             error.setInfo("please enter your password account!");
             pene.getChildren().remove(txtDistination);
             pene.getChildren().remove(boxDistination);
-        }
-        else{
+        } else {
             error.setInfo("please enter your distination acount and your password account!");
         }
     }
@@ -75,9 +105,6 @@ public class CloseAccount implements Initializable {
     @FXML
     void pressNext(ActionEvent event) throws IOException {
 
-//        if (!boxDistination.getValue().equals(null)){
-//            txtDistination.setText((String) boxDistination.getValue());
-//        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("");
@@ -93,11 +120,12 @@ public class CloseAccount implements Initializable {
                 error.setError("your password is invalid!");
                 return;
             }
+
             account.Deposit(balance);
+            account.usedAccount.add(new UsedAccount(balance));
 
+            DataBase.deleteAccount(AccountManagement.choosenAccount);
             DataBase.printnewAccount(account);
-
-
 
             Stage stage = (Stage) btnNext.getScene().getWindow();
             stage.close();

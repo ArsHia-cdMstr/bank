@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import server.Loan;
 
-public class MainPage implements Initializable {
+public class MainPage  {
 
 
     @FXML private Button btnExit;
@@ -74,7 +74,13 @@ public class MainPage implements Initializable {
     }
 
     @FXML
-    void pressFrequentlyUsedAccounts(ActionEvent event) {
+    void pressFrequentlyUsedAccounts(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnFrequentlyUsedAccounts.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("FrequentlyUsedAccounts.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
 
     }
 
@@ -90,12 +96,18 @@ public class MainPage implements Initializable {
 
     @FXML
     void pressLoanRequest(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnLoanRequest.getScene().getWindow();
-        stage.close();
-        Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("LoanRequest.fxml"));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+       if (!AccountManagement.choosenAccount.hasLoan){
+
+           Stage stage = (Stage) btnLoanRequest.getScene().getWindow();
+           stage.close();
+           Stage primaryStage = new Stage();
+           Parent root = FXMLLoader.load(getClass().getResource("LoanRequest.fxml"));
+           primaryStage.setScene(new Scene(root));
+           primaryStage.show();
+       }else{
+           error.setError("this account already has a loan");
+       }
+
     }
 
     @FXML
@@ -109,8 +121,4 @@ public class MainPage implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        DataBase.readLoan(AccountManagement.choosenAccount.AccountNum);
-    }
 }

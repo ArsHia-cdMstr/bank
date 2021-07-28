@@ -64,11 +64,12 @@ public class SignUp extends Signin {
 
 //make sure that Users directory exists
         File UserDir = new File("Users");
-        if (!UserDir.exists())
+        if (!UserDir.exists()) {
             UserDir.mkdir();
+        }
 
-// if (!signUpIsCorrect())
-// return;
+        if (!signUpIsCorrect())
+            return;
 
 //creating a user account
         user = new User(txtFirstName.getText(), txtLastName.getText(),txtPassword1.getText()
@@ -98,10 +99,6 @@ public class SignUp extends Signin {
             return false;
         }
 
-//check that the gmail is correct or not
-        if (!isEmailCorrect(txtEmail.getText()))
-            return false;
-
 //check the user have already signed up or not
         if ( DataBase.isNationalCodeExist(txtNationalCode.getText()) )
             return false;
@@ -115,12 +112,18 @@ public class SignUp extends Signin {
             return false;
 
 //check that national code is only numberic
-        if (!isOnlyNumber(txtNationalCode.getText()))
+        if (!(isOnlyNumber(txtNationalCode.getText()) && isOnlyNumber(txtPhone.getText())))
             return false;
 
-        return true;
-    }
+        if (!passwordHas4Index(txtPassword1.getText()))
+            return false;
 
+        if (! nameXHasNIndex(txtPhone.getText(), 11)) {
+            return false;
+        }
+
+            return true;
+    }
     boolean isonlyLetter (String name){
 
         for (int i = 0; i < name.length(); i++) {
@@ -136,7 +139,7 @@ public class SignUp extends Signin {
 
         for (int i = 0; i < code.length(); i++) {
             if(!isNumber(code.charAt(i))) {
-                error.setError("the national code isn't fully numberic ");
+                error.setError("the " + code + "isn't fully numberic ");
                 return false;
             }
         }
@@ -145,40 +148,23 @@ public class SignUp extends Signin {
     boolean isNumber(char ch){
         return ('0' <= (int)ch && (int)ch <= '9');
     }
-    boolean nationalNumHas10Index (String nationalNum){
-        if (nationalNum.length() == 10)
+    boolean nameXHasNIndex (String name, int indexLimit){
+        if (name.length() == indexLimit)
             return true;
         else {
-            error.setError("natioanl number haven't 10 index");
+            error.setError(  name + " haven't"+ indexLimit + " index");
             return false;
         }
     }
-    boolean isEmailCorrect (String Email){
-
-        try {
-// at the end of the
-            boolean isTheEndOfEmailCorrect = Email.substring(Email.lastIndexOf(".")).equals(".com") &&
-                    Email.contains("@");
-            if (!isTheEndOfEmailCorrect) {
-                error.setError(" you havn't write '@' or the '.com' ");
-                return false;
-            }
-        }catch (IndexOutOfBoundsException e){
-            error.setError("the gmail isn't correct");
-            return false;
-        }
-// Email = "https://www." + Email;
-// try {
-// java.net.URL url = new java.net.URL(Email);
-// Scanner input = new Scanner(url.openStream());
-// } catch (Exception e) {
-// return false;
-// }
-
-        return true;
+    boolean nationalNumHas10Index (String nationalCode){
+       return  nameXHasNIndex( nationalCode , 10);
     }
-
+    boolean passwordHas4Index(String pass){
+        return nameXHasNIndex(pass, 4);
+    }
 }
+
+
 
 
 

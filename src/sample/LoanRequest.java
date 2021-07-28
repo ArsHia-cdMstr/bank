@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import server.DataBase;
 import server.Loan;
 import sun.swing.AccumulativeRunnable;
 
@@ -44,25 +45,72 @@ public class LoanRequest {
     }
 
     @FXML
-    void pressLoan1(ActionEvent event) {
+    void pressLoan1(ActionEvent event) throws IOException {
 
         Loan loan = new Loan (1.15, 1000 , 6 , AccountManagement.choosenAccount.AccountNum);
+        AccountManagement.choosenAccount.Deposit(1000);
+        error.setInfo( "your loan request have been accepted ");
+        AccountManagement.choosenAccount.hasLoan = true;
+        DataBase.printnewAccount(AccountManagement.choosenAccount);
+
+        Stage stage = (Stage) btnLoan4.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+
     }
 
     @FXML
-    void pressLoan2(ActionEvent event) {
+    void pressLoan2(ActionEvent event) throws IOException {
 
         Loan loan = new Loan(1.25, 15000, 12, AccountManagement.choosenAccount.AccountNum);
+        AccountManagement.choosenAccount.Deposit(1500);
+        error.setInfo( "your loan request have been accepted ");
+        AccountManagement.choosenAccount.hasLoan = true;
+        DataBase.printnewAccount(AccountManagement.choosenAccount);
+
+        Stage stage = (Stage) btnLoan2.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML
-    void pressLoan3(ActionEvent event) {
+    void pressLoan3(ActionEvent event) throws IOException {
         Loan loan = new Loan( 1.20,12500, 8, AccountManagement.choosenAccount.AccountNum );
+        AccountManagement.choosenAccount.Deposit(12500);
+        error.setInfo( "your loan request have been accepted ");
+        AccountManagement.choosenAccount.hasLoan = true;
+        DataBase.printnewAccount(AccountManagement.choosenAccount);
+
+        Stage stage = (Stage) btnLoan3.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     @FXML
-    void pressLoan4(ActionEvent event) {
+    void pressLoan4(ActionEvent event) throws IOException {
         Loan loan = new Loan(1.24, 20000, 24, AccountManagement.choosenAccount.AccountNum);
+        AccountManagement.choosenAccount.Deposit(20000);
+        error.setInfo( "your loan request have been accepted ");
+        AccountManagement.choosenAccount.hasLoan = true;
+        DataBase.printnewAccount(AccountManagement.choosenAccount);
+
+        Stage stage = (Stage) btnLoan4.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
+
+
 
 }

@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,20 +18,23 @@ import java.util.ResourceBundle;
 public class Accountinfo2 implements Initializable {
 
     @FXML
-    private Button btnEnter;
+    private Button btnEnter = new Button();
 
     @FXML
-    private PasswordField txtPassword;
+    private PasswordField txtPassword = new PasswordField();
 
     @FXML
-    private Label lblAlias;
+    private Label lblAlias = new Label();
 
     @FXML
-    private Label lblAccNumber;
+    private Label lblAccNumber = new Label();
+
+    @FXML
+    private Button btnBack = new Button();
 
     @FXML
     void pressEnter(ActionEvent event) throws IOException {
-        if (!(txtPassword.getText().equals(AccountManagement.choosenAccount.AccountPassword))){
+        if (!(txtPassword.getText().equals(AccountManagement.choosenAccount.AccountPassword))) {
             error.setError("password is invalid!");
             return;
         }
@@ -44,6 +46,16 @@ public class Accountinfo2 implements Initializable {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
+    }
+
+    @FXML
+    void pressBack(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AccountManagement.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
 

@@ -18,15 +18,17 @@ import server.*;
 
 public class Signin  implements Initializable {
 
-    @FXML private Label lblUsername;
+    @FXML private Label lblUsername = new Label();
 
-    @FXML private Label lblPassword;
+    @FXML private Label lblPassword = new Label();
 
-    @FXML private Button btnEnter;
+    @FXML private Button btnEnter = new Button();
 
     @FXML public TextField txtUsername = new TextField();
 
-    @FXML private TextField txtPassword;
+    @FXML private TextField txtPassword = new TextField();
+
+    @FXML private Button btnBack = new Button();
 
     private int count;
 
@@ -40,6 +42,7 @@ public class Signin  implements Initializable {
         User user = DataBase.readUser(txtUsername.getText());
         if ( user == null )
             return;
+
         DataBase.userSaver(user);
         // we always call signUps
         // user so when we wanna
@@ -49,7 +52,6 @@ public class Signin  implements Initializable {
         String passInput = txtPassword.getText();
 
         if (passInput.equals(passWord)) {
-            System.out.println("DataBase.user.NumberOfUserAccount = " + DataBase.user.NumberOfUserAccount);
             count = DataBase.user.NumberOfUserAccount;
 
             if (count == 0){
@@ -79,9 +81,20 @@ public class Signin  implements Initializable {
         }
     }
 
+    @FXML
+    void pressBack(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("FirstPage.fxml"));
+        primaryStage.setTitle("Bank Manager");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
 
     }
 }

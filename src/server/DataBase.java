@@ -19,6 +19,30 @@ public class DataBase {
         user = user1 ;
     }
 
+    public static void changeDestinationAlias(ArrayList<UsedAccount> usedAccounts,int accountNumber,String newAlias){
+        UsedAccount UA = serchByAccountNumber( usedAccounts , accountNumber);
+        usedAccounts.remove(usedAccounts.indexOf(UA));
+        UA.Alias = newAlias;
+        usedAccounts.add(UA);
+//we have to save the account after these
+    }
+    static UsedAccount serchByAccountNumber(ArrayList<UsedAccount> usedAccounts , int accountNumber ){
+        for (UsedAccount U : usedAccounts){
+            if ( U.usedAccountNumber == accountNumber)
+                return U;
+        }
+        return null;
+    }
+
+
+    public static ArrayList<Loan> loans = new ArrayList<>();
+    public void checkAllLoanDeadLines () {
+        ArrayList<Loan> loans = DataBase.readLoan();
+        for (Loan loan : loans) {
+            loan.checkDeadLine(System.currentTimeMillis());
+        }
+    }
+
 
     public static Account readAccount(int accountNumber) {
         try ( // Create an input stream for file object.dat
@@ -28,6 +52,7 @@ public class DataBase {
 
             return(Account)input.readObject();
         } catch (Exception e) {
+        error.setError(accountNumber + "account name didn't found");
         }
 
         return null;
@@ -40,27 +65,24 @@ public class DataBase {
 
             return(User) input.readObject();
         } catch (Exception e) {
-//            error.setError("username invalid!");
-            e.printStackTrace();
+            error.setError("username invalid!");
         }
 
         return null;
     }
-    public static Loan readLoan (int accountNumber ) {
+    public static ArrayList<Loan> readLoan () {
         try ( // Create an input stream for file object.dat
               ObjectInputStream input =
-                      new ObjectInputStream(new FileInputStream("Users/" +accountNumber+ "Loan.dat"));
+                      new ObjectInputStream(new FileInputStream("Users/" + "Loans.dat"));
         ) {
 
-            return(Loan)input.readObject();
+            return (ArrayList<Loan>) input.readObject();
         } catch (Exception e) {
             error.setInfo("this Account number has no Loan");
         }
 
         return null;
     }
-
-    //making an account
     public static void printnewAccount(Account account) {
         printUser(user);
         try ( // Create an output stream for file object.dat
@@ -69,12 +91,11 @@ public class DataBase {
                       new ObjectOutputStream(new FileOutputStream("Users/"+ account.AccountNum + ".dat"));
 
         ) {
-// Write a string, double value, and object to the file
+
             output.writeObject(account);
         } catch (Exception e) {
         }
     }
-
     public static void printUser(User user) {
 
         try ( // Create an output stream for file object.dat
@@ -113,24 +134,31 @@ public class DataBase {
             return false;
         }
     }
-    public static void deleteAccount(String nationalCode, Account account){
+    public static void deleteAccount( Account account){
 
-        user.AccountNumbersOfUser.remove(account.AccountNum);
+        user.AccountNumbersOfUser.remove(user.AccountNumbersOfUser.indexOf(account.AccountNum));
         user.NumberOfUserAccount-- ;
-        user.AccountNumbersOfUser.remove(account.alias);
+        user.AliasesOfUser.remove(user.AliasesOfUser.indexOf(account.alias));
+        printUser(user);
 
-        File deletedFile = new File("Users/" + nationalCode + account.alias + ".dat");
+        File deletedFile = new File("Users/" + account.AccountNum + ".dat");
         deletedFile.delete();
     }
-    public static void printLoan(int accountNumber, Loan loan){
+    public static void deleteloan (int accountNumber ){
+
+
+        File deletedFile = new File("Users/" + accountNumber + "Loan.dat");
+        deletedFile.delete();
+    }
+    public static void printLoan( ArrayList<Loan> loans ){
         try ( // Create an output stream for file object.dat
 
               ObjectOutputStream output =
-                      new ObjectOutputStream(new FileOutputStream("Users/"+accountNumber + "loan.dat"));
+                      new ObjectOutputStream(new FileOutputStream("Users/" + "Loans.dat"));
 
         ) {
 // Write a string, double value, and object to the file
-            output.writeObject(loan);
+            output.writeObject(loans);
         } catch (Exception e) {
             e.printStackTrace();
         }

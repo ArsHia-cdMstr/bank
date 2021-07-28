@@ -24,7 +24,7 @@ public class LongTermAccount extends Account implements Serializable {
         long TimeDiffrence = System.currentTimeMillis() - AccountDateCreated;
 
         //the times that we should clculate balance
-        int calculateTimes = (int) (TimeDiffrence % ( 3 * 60 * 1000 ));
+        int calculateTimes = (int) (TimeDiffrence / ( 3 * 60 * 1000 ));
         for (int i = 1; i <= calculateTimes; i++)
             balance *= interestRate;
 
